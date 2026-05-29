@@ -35,4 +35,4 @@ function ProductItem({ item }) {
   )
 }
 
-export default ProductItem
+export default React.memo(ProductItem)

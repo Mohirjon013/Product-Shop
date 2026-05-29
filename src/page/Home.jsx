@@ -6,11 +6,11 @@ import { LoadingOutlined } from '@ant-design/icons'
 import useDebounce from '../hook/useDebounce'
 import { Empty } from 'antd'
 import SearchProduct from '../components/SearchProduct'
-import { Context } from '../context/ProductContext'
+import {  StateContext } from '../context/ProductContext'
 
 function Home() {
   const [product, setProduct] = useState([])
-  const {categoryId} = useContext(Context)
+  const {categoryId} = useContext(StateContext)
 
   const [isLoading, setLoading] = useState(true)
   const handleSetLoading = useCallback((value) => setLoading(value), [])
@@ -20,6 +20,8 @@ function Home() {
     setLoading(true)
     setSearchValue(e.target.value)
   },[])
+
+  
   const searchWaitingValue = useDebounce(searchValue, 800)
 
   useEffect(() => {
@@ -31,7 +33,6 @@ function Home() {
       })
 
       setProduct(res.data);
-      // console.log(res.data);
       setLoading(false)
     }
     gettingProduct()

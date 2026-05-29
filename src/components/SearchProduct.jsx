@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Select } from 'antd';
 import axios from 'axios';
-import { Context } from '../context/ProductContext';
+import {  DispatchContext } from '../context/ProductContext';
 
 
 
 function SearchProduct({setLoading}) {
     const [categoryData, setCategoryData] = useState([])
-    const {setCategoryId} = useContext(Context)
+    const dispatch = useContext(DispatchContext)
 
     const onChange = value => {
         setLoading(true)
-        setTimeout(() => setCategoryId(value), 800);
-    };
+        setTimeout(() => dispatch({type: 'SET_CATEGORY', payload:value}), 800);
+    }
 
     useEffect(() => {
         async function gettingCategory() {
@@ -38,7 +38,7 @@ function SearchProduct({setLoading}) {
             allowClear
             showSearch
             optionFilterProp="label"
-            placeholder="Select a person"
+            placeholder="Select a categories"
             onChange={onChange}
             options={categoryData}
         />
